@@ -1,7 +1,7 @@
 import openai
 
 # OpenAI API 키 설정
-# 수정중
+# 양정호
 # 파인 튜닝된 모델의 ID
 fine_tuned_model_id = 'ft:gpt-3.5-turbo-0125:personal::9wAN8XY4'
 
