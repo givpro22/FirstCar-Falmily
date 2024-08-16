@@ -18,85 +18,70 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 
-window = Tk()
+def sk(window, canvas):
+    canvas.place(x = 0, y = 0)
+    canvas.create_rectangle(
+        16.0,
+        230.0,
+        359.0,
+        274.0,
+        fill="#000000",
+        outline="")
 
-window.geometry("375x812")
-window.configure(bg = "#FDF7FD")
+    image_image_1 = PhotoImage(
+        file=relative_to_assets("image_1.png"))
+    image_1 = canvas.create_image(
+        214.0,
+        161.0,
+        image=image_image_1
+    )
 
+    canvas.create_rectangle(
+        16.0,
+        52.0,
+        359.0,
+        100.0,
+        fill="#000000",
+        outline="")
 
-canvas = Canvas(
-    window,
-    bg = "#FDF7FD",
-    height = 812,
-    width = 375,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
+    canvas.create_rectangle(
+        16.0,
+        298.0,
+        359.0,
+        1000.0,
+        fill="#000000",
+        outline="")
 
-canvas.place(x = 0, y = 0)
-canvas.create_rectangle(
-    16.0,
-    230.0,
-    359.0,
-    274.0,
-    fill="#000000",
-    outline="")
+    button_image_1 = PhotoImage(
+        file=relative_to_assets("button_1.png"))
+    button_1 = Button(
+        image=button_image_1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_1 clicked"),
+        relief="flat"
+    )
+    button_1.place(
+        x=24.0,
+        y=724.0,
+        width=327.0,
+        height=64.0
+    )
 
-image_image_1 = PhotoImage(
-    file=relative_to_assets("image_1.png"))
-image_1 = canvas.create_image(
-    214.0,
-    161.0,
-    image=image_image_1
-)
+    image_image_2 = PhotoImage(
+        file=relative_to_assets("image_2.png"))
+    image_2 = canvas.create_image(
+        187.0,
+        794.0,
+        image=image_image_2
+    )
 
-canvas.create_rectangle(
-    16.0,
-    52.0,
-    359.0,
-    100.0,
-    fill="#000000",
-    outline="")
-
-canvas.create_rectangle(
-    16.0,
-    298.0,
-    359.0,
-    1000.0,
-    fill="#000000",
-    outline="")
-
-button_image_1 = PhotoImage(
-    file=relative_to_assets("button_1.png"))
-button_1 = Button(
-    image=button_image_1,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
-    relief="flat"
-)
-button_1.place(
-    x=24.0,
-    y=724.0,
-    width=327.0,
-    height=64.0
-)
-
-image_image_2 = PhotoImage(
-    file=relative_to_assets("image_2.png"))
-image_2 = canvas.create_image(
-    187.0,
-    794.0,
-    image=image_image_2
-)
-
-image_image_3 = PhotoImage(
-    file=relative_to_assets("image_3.png"))
-image_3 = canvas.create_image(
-    187.0,
-    22.0,
-    image=image_image_3
-)
-window.resizable(False, False)
-window.mainloop()
+    image_image_3 = PhotoImage(
+        file=relative_to_assets("image_3.png"))
+    image_3 = canvas.create_image(
+        187.0,
+        22.0,
+        image=image_image_3
+    )
+    window.resizable(False, False)
+    window.mainloop()

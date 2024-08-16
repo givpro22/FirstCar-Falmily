@@ -8,7 +8,7 @@ from pathlib import Path
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
-
+from gui1 import sk
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\user\OneDrive - Chonnam National University\2024\해커톤0813\첫차패밀리_해커톤#5\build\연습gui\build\assets\frame0")
@@ -49,7 +49,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: sk(window, canvas),
     relief="flat"
 )
 button_1.place(
