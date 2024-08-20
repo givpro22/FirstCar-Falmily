@@ -8,6 +8,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from report import generate_report
+from data import * #여기서 data.py에서 파일 가져오기
 
 app = Flask(__name__)
 
