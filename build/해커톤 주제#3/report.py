@@ -37,5 +37,6 @@ def generate_report(data):
 
     pdf.build(elements)
     buffer.seek(0)
+    #수정중입니다 0821 1:07
 
     return buffer
