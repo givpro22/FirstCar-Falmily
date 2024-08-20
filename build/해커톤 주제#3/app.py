@@ -21,9 +21,9 @@ def index():
         df = pd.read_csv(file)
         
         # 임의의 데이터 분석 예시 (실제 분석은 기업 데이터에 맞게 수행)
-        df['Category'] = df['Category'].astype(str)
-        report = generate_report(df)
-        
+        df['Category'] = df['Category'].astype(str)                      #여기 부분을 data.py 파일에 넣어서 나눠야 할듯 
+        report = generate_report(df)                                     
+                                                    
         return send_file(report, as_attachment=True, download_name='report.pdf')
     return render_template('index.html')
 
