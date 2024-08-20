@@ -6,7 +6,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
-#test
+#test@@
 # 한글 폰트 등록
 pdfmetrics.registerFont(TTFont('MalgunGothic', 'malgun.ttf'))
 
