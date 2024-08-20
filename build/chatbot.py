@@ -10,6 +10,7 @@ conversation_history = [
     {"role": "system", "content": "Marv is a friendly and humorous chatbot for a cafe."}
 ]
 #ssdfsf
+#1234
 def continue_conversation(user_input):
     # 사용자의 입력을 대화 이력에 추가
     conversation_history.append({"role": "user", "content": user_input})
