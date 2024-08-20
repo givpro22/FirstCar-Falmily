@@ -1,0 +1,26 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.card {
+    margin-top: 50px;
+}
+
+.card-header {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+.form-control {
+    margin-bottom: 20px;
+}
+
+.btn-success {
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
