@@ -10,7 +10,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from report import generate_report
 from data import * #여기서 data.py에서 파일
 #민혁 hi aaaaa
-
+#수정 test 채민
 
 app = Flask(__name__)
 
