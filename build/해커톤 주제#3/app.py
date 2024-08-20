@@ -9,6 +9,8 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from report import generate_report
 from data import * #여기서 data.py에서 파일
+#민혁 hi
+
 
 app = Flask(__name__)
 
