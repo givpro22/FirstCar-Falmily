@@ -46,12 +46,7 @@ plt.xlabel('계정명', fontsize=14, color='black')
 plt.ylabel('차변', fontsize=14, color='black')
 plt.xticks(rotation=90, fontsize=12, color='black')
 plt.yticks(fontsize=12, color='black')
-
-# 범례(legend)를 테두리로 감싸기
-legend = plt.legend(title='년도', title_fontsize='13', fontsize='12', frameon=True, loc='best')
-legend.get_frame().set_edgecolor('black')
-legend.get_frame().set_linewidth(1.5)
-
+plt.legend(title='년도', title_fontsize='13', fontsize='12', frameon=False, loc='best')
 plt.tight_layout()
 plt.show()
 
@@ -72,17 +67,26 @@ def plot_pie_chart(data, year, title):
     
     # 원형 차트 생성
     plt.figure(figsize=(12, 8))
-    plt.pie(
+    wedges, texts, autotexts = plt.pie(
         data_with_other,
         labels=data_with_other.index,
         autopct='%1.1f%%',
-        startangle=90,  # Start angle at 12 o'clock
+        startangle=90,
         colors=sns.color_palette("husl", len(data_with_other)),
         counterclock=False,  # 시계방향
+        wedgeprops=dict(width=0.4, edgecolor='w'),
         textprops={'color': 'black', 'fontsize': 12}
     )
     plt.title(title, fontsize=16, color='black')
-
+    
+    # 스타일 설정
+    for text in texts:
+        text.set_fontsize(10)
+        text.set_color('black')
+    for autotext in autotexts:
+        autotext.set_color('black')
+        autotext.set_fontsize(12)
+    
     # 원형 차트의 원형을 일정하게 유지하기 위해 `equal` aspect ratio 설정
     plt.gca().set_aspect('equal', adjustable='box')
 
