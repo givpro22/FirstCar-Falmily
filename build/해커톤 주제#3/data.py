@@ -8,7 +8,8 @@ def process_data(files):
         if file.filename.startswith('결산_엑셀_'):
             df = pd.read_excel(file)
             dfs.append(df)
-    
+
+
     # '제품명' 기준으로 병합
     if dfs:
         merged_df = dfs[0]  # 첫 번째 데이터프레임을 기준으로 초기화
