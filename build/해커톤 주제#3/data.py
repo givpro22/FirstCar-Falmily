@@ -5,10 +5,11 @@ def process_data(files):
     # '결산_엑셀_'로 시작하는 파일만 필터링
     dfs = []
     for file in files:
-        if file.filename.startswith('결산_엑셀_'):
+        if file.filename.startswith('제조경비_대장_엑셀_2022_2023'):
             df = pd.read_excel(file)
             dfs.append(df)
-    
+
+
     # '제품명' 기준으로 병합
     if dfs:
         merged_df = dfs[0]  # 첫 번째 데이터프레임을 기준으로 초기화
@@ -17,4 +18,4 @@ def process_data(files):
     else:
         merged_df = pd.DataFrame()  # 필터링된 파일이 없는 경우 빈 데이터프레임 반환
     
-    return merged_df
+    return dfs #임시로 바꿔둔거임 양정호 원래는 merged_df임
