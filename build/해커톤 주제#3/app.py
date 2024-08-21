@@ -38,6 +38,10 @@ def index():
     
     return render_template('index.html')
 
+@app.route('/FirstCar', methods=['GET'])
+def first_car():
+    return render_template('first_car.html')  # /FirstCar에 대한 템플릿 렌더링
+
 
 if __name__ == '__main__':
     app.run(debug=True)
