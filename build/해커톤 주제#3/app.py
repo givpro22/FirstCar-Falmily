@@ -22,9 +22,11 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        file = request.files['file']
-        df = process_data(file)  # 데이터 처리 함수 호출
+        files = request.files.getlist('file')  # 여러 파일 가져오기
+        if not files or len(files) < 2:
+            return "Please upload at least two files", 400
         
+        df = process_data(files) 
         report = generate_report(df)
         return send_file(report, as_attachment=True, download_name='report.pdf')
     
