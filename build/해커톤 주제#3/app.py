@@ -27,6 +27,12 @@ def index():
             return "Please upload at least two files", 400
         
         df = process_data(files) 
+        #A=1번 과정 함수(df)
+        #2번
+        #3번
+        #4번
+        
+        
         report = generate_report(df)
         return send_file(report, as_attachment=True, download_name='report.pdf')
     
