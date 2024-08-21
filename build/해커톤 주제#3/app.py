@@ -37,7 +37,9 @@ def index():
         
         output = BytesIO()
         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-            df.to_excel(writer, index=False)
+            af.to_excel(writer, index=False)
+            #df.to_excel(writer, index=False)
+
         output.seek(0)  # 파일 포인터를 시작 위치로 이동
         # 생성된 엑셀 파일을 다운로드할 수 있게 반환
         return send_file(output, as_attachment=True, download_name='processed_data.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
