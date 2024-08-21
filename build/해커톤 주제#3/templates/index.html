@@ -15,13 +15,12 @@
                 <h1>Upload Your Data for Analysis</h1>
             </div>
             <div class="card-body">
-                <!-- 폼의 action을 /FirstCar로 설정 -->
-                <form action="/FirstCar" method="GET" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
+                <form action="/" method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
                     <div class="mb-3 w-75">
                         <!-- 파일 여러 개 선택 가능하도록 multiple 속성 추가 -->
                         <input type="file" name="file" class="form-control" multiple required>
                     </div>
-                    <button type="submit" class="btn btn-success w-50">Go to First Car Page</button>
+                    <button type="submit" class="btn btn-success w-50">Generate Report</button>
                 </form>
             </div>
         </div>
