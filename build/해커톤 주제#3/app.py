@@ -11,6 +11,7 @@ from data import * #여기서 data.py에서 파일
 from data import process_data
 from xlsxwriter import *
 from mf_exp_sum import process_1data
+from visual import visual
 #민혁 hi aaaaa
 #수정 test 채민
 
@@ -26,7 +27,7 @@ def index():
         df = process_1data(df)  # 데이터 가공 함수 호출 mf_exp_sum.py에 있는 함수
         # 엑셀 파일을 메모리에 저장
         
-        #데이터를 matplot 호출 함수 visual.py에 있는 함수
+        visual(df)#데이터를 matplot 호출 함수 visual.py에 있는 함수
         
         output = BytesIO()
         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
