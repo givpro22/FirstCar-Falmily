@@ -16,4 +16,12 @@ def process_2data(files):
         if file.filename.startswith('원불자재수불부_엑셀_2022'):
             af = pd.read_excel(file)
             afs.append(af)
-    return afs #임시로 바꿔둔거임 양정호 원래는 merged_df임
+    return afs
+
+def process_3data(files):
+    afs = []
+    for file in files:
+        if file.filename.startswith('원불자재수불부_엑셀_2023'):
+            af = pd.read_excel(file)
+            afs.append(af)
+    return afs

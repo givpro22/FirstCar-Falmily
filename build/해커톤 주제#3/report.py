@@ -1,41 +1,27 @@
+from fpdf import FPDF
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from io import BytesIO
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 
-# 경영 개선 리포트 생성 함수
-def generate_report(data):
-    # 데이터 분석 및 시각화
-    plt.figure(figsize=(10, 6))
-    sns.barplot(x='Category', y='Value', data=data)
-    plt.title('Category vs Value')
+def generate_pdf(dataframe):
+    pdf = FPDF()
+    pdf.add_page()
+    # 유니코드 폰트 추가
+    pdf.add_font('Nanum', '', "C:/Users/jeong/OneDrive/바탕 화면/NanumGothic/NanumGothic-Regular.ttf", uni=True)
+    pdf.set_font('Nanum', size=10)
     
-    # 그래프를 메모리에 저장
-    img_buf = BytesIO()
-    plt.savefig(img_buf, format='png')
-    img_buf.seek(0)
-    
-    # PDF 리포트 생성
-    buffer = BytesIO()
-    pdf = SimpleDocTemplate(buffer, pagesize=A4)
-    styles = getSampleStyleSheet()
-    elements = []
+    # 테이블 헤더 작성
+    col_widths = [50, 30, 30, 50]  # 열 너비 설정
+    pdf.cell(col_widths[0], 10, '계정명', border=1, align='C')
+    pdf.cell(col_widths[1], 10, '2022년', border=1, align='C')
+    pdf.cell(col_widths[2], 10, '2023년', border=1, align='C')
+    pdf.cell(col_widths[3], 10, '전기대비 증감율', border=1, align='C')
+    pdf.ln()
 
-    elements.append(Paragraph("Management Improvement Report", styles['Title']))
-    elements.append(Spacer(1, 12))
+    # 데이터프레임의 각 행을 PDF에 추가
+    for index, row in dataframe.iterrows():
+        pdf.cell(col_widths[0], 10, str(row['계정명']), border=1)
+        pdf.cell(col_widths[1], 10, f"{int(row['2022년']):,}", border=1, align='R')
+        pdf.cell(col_widths[2], 10, f"{int(row['2023년']):,}", border=1, align='R')
+        pdf.cell(col_widths[3], 10, str(row['전기대비 증감율']), border=1, align='R')
+        pdf.ln()
 
-    # 이미지 추가
-    elements.append(Image(img_buf))
-    elements.append(Spacer(1, 12))
-
-    elements.append(Paragraph("Based on the analysis of the raw data, the following insights were found...", styles['Normal']))
-
-    pdf.build(elements)
-    buffer.seek(0)
-    #수정중입니다 0821 1:07
-
-    return buffer
+    return pdf
