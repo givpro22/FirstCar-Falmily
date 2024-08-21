@@ -1,10 +1,8 @@
 import pandas as pd
 
-# 엑셀 파일 읽기
-
 # 필요한 칼럼만 선택 (계정명, 등록일, 차변)
 def process_1data(df):
-    df_filtered = df.loc[:, ['계정명', '등록일', '차변']]
+    df_filtered = df[0].loc[:, ['계정명', '등록일', '차변']]
 
     # 등록일에서 년도만 추출
     df_filtered.loc[:, '년도'] = pd.to_datetime(df_filtered['등록일']).dt.year
@@ -21,8 +19,10 @@ def process_1data(df):
     # 2022년, 2023년, 증감율 계산
     df_pivot['전기대비 증감율'] = (df_pivot[2023] - df_pivot[2022]) / df_pivot[2022] * 100
 
+    # 인덱스를 컬럼으로 변환
+    df_pivot = df_pivot.rename(columns={2022: '2022년', 2023: '2023년'}).reset_index()
+
     # 결과 정렬 및 출력
-    df_pivot = df_pivot.rename(columns={2022: '2022년', 2023: '2023년'})
-    df_pivot = df_pivot[['2022년', '2023년', '전기대비 증감율']]
+    df_pivot = df_pivot[['계정명', '2022년', '2023년', '전기대비 증감율']]
 
     return df_pivot

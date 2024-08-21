@@ -22,10 +22,13 @@ app = Flask(__name__)
 def index():
     if request.method == 'POST':
         files = request.files.getlist('file')  # 업로드된 파일들 가져오기
-        df = process_data(files)  # 데이터 처리 함수 호출
-        df = process_1data(df)
+        df = process_data(files)  # 데이터 전처리 함수 호출 data.py에 있는 함수
+        df = process_1data(df)  # 데이터 가공 함수 호출 sum.py에 있는 함수
         # 엑셀 파일을 메모리에 저장
         output = BytesIO()
+        
+        
+        
         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
             df.to_excel(writer, index=False)
         output.seek(0)  # 파일 포인터를 시작 위치로 이동
