@@ -21,7 +21,7 @@ df_grouped.to_excel(output_path, index=False)'''
 import pandas as pd
 
 # 엑셀 파일 읽기
-file_path = 'C:/Users/dhals/Desktop/pdf#3/엑셀파일/제조경비_대장_엑셀_2022_2023.xlsx'  # 엑셀 파일 경로를 입력하세요.
+file_path = 'C:/Users/214484/Desktop/github/FirstCar-Family/제조경비_대장_엑셀_2022_2023.xlsx'  # 엑셀 파일 경로를 입력하세요.
 df = pd.read_excel(file_path)
 
 # 필요한 칼럼만 선택 (계정명, 등록일, 차변)
@@ -49,5 +49,5 @@ df_pivot = df_pivot[['2022년', '2023년', '전기대비 증감율']]
 print(df_pivot)
 
 # 필요한 경우, 결과를 새로운 엑셀 파일로 저장
-output_path = 'C:/Users/dhals/Desktop/pdf#3/엑셀파일/output_file.xlsx'  # 저장할 파일 경로를 입력하세요.
+output_path = 'C:/Users/214484/Desktop/github/FirstCar-Family/output_file.xlsx'  # 저장할 파일 경로를 입력하세요.
 df_pivot.to_excel(output_path)
