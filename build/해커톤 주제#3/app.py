@@ -4,10 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from io import BytesIO
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
-from data import * #여기서 data.py에서 파일
+
+
 from data import process_data
 from data import process_2data
 
@@ -15,6 +13,8 @@ from xlsxwriter import *
 from mf_exp_sum import manufacturing_1data
 from raw_ma_sum import manufacturing_2data
 from visual import visual
+
+from report import generate_report
 
 #민혁 hi aaaaa
 #수정 test 채민
