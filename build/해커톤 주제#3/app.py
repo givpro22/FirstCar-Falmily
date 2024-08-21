@@ -29,3 +29,7 @@ def index():
         return send_file(report, as_attachment=True, download_name='report.pdf')
     
     return render_template('index.html')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
