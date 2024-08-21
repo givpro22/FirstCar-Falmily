@@ -1,7 +1,7 @@
 import pandas as pd
 
 # 필요한 칼럼만 선택 (계정명, 등록일, 차변)
-def process_1data(df):
+def manufacturing_1data(df):
     df_filtered = df[0].loc[:, ['계정명', '등록일', '차변']]
 
     # 등록일에서 년도만 추출

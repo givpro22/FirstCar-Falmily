@@ -9,9 +9,13 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from data import * #여기서 data.py에서 파일
 from data import process_data
+from data import process_2data
+
 from xlsxwriter import *
-from mf_exp_sum import process_1data
+from mf_exp_sum import manufacturing_1data
+from raw_ma_sum import manufacturing_2data
 from visual import visual
+
 #민혁 hi aaaaa
 #수정 test 채민
 
@@ -24,10 +28,12 @@ def index():
     if request.method == 'POST':
         files = request.files.getlist('file')  # 업로드된 파일들 가져오기
         df = process_data(files)  # 데이터 전처리 함수 호출 data.py에 있는 함수
-        df = process_1data(df)  # 데이터 가공 함수 호출 mf_exp_sum.py에 있는 함수
+        df = manufacturing_1data(df)  # 데이터 가공 함수 호출 mf_exp_sum.py에 있는 함수
         # 엑셀 파일을 메모리에 저장
+        af = process_2data(files)
+        af = manufacturing_2data(af)
         
-        visual(df)#데이터를 matplot 호출 함수 visual.py에 있는 함수
+        #visual(df) #데이터를 시각화 해주는 matplot 호출 함수 visual.py에 있는 함수
         
         output = BytesIO()
         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
