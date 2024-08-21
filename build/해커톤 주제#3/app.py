@@ -7,7 +7,6 @@ from io import BytesIO
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
-from report import generate_report
 from data import * #여기서 data.py에서 파일
 from data import process_data
 from xlsxwriter import *
