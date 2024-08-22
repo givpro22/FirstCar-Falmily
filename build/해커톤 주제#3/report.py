@@ -143,7 +143,7 @@ def generate_pdf3(dataframe):
 
     # 보고서 제목 설정
     pdf.set_font('Nanum', 'B', 20)
-    pdf.cell(0, 10, 'FY2023 원가율 BEST 10', ln=True, align='C')
+    pdf.cell(0, 10, 'FY2023 원가율 WORST 10', ln=True, align='C')
     pdf.set_font('Nanum', '', 12)
     pdf.cell(0, 10, '(단위: 원)', ln=True, align='R')
     pdf.ln(5)
@@ -181,7 +181,7 @@ def generate_pdf4(dataframe):
 
     # 보고서 제목 설정
     pdf.set_font('Nanum', 'B', 20)
-    pdf.cell(0, 10, 'FY2023 원가율 WORST 10', ln=True, align='C')
+    pdf.cell(0, 10, 'FY2023 원가율 BEST 10', ln=True, align='C')
     pdf.set_font('Nanum', '', 12)
     pdf.cell(0, 10, '(단위: 원)', ln=True, align='R')
     pdf.ln(5)
