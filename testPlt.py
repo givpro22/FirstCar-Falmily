@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # 엑셀 파일 읽기
-file_path = 'C:/Users/214484/Desktop/github/FirstCar-Family/제조경비_대장_엑셀_2022_2023.xlsx'
+file_path = 'C:\\Users\\214484\\Desktop\\ocoals\\FirstCar-Family\\제조경비_대장_엑셀_2022_2023.xlsx'
 df = pd.read_excel(file_path)
 
 # 필요한 칼럼만 선택 (계정명, 등록일, 차변)
@@ -51,6 +51,9 @@ plt.yticks(fontsize=12, color='black')
 plt.legend(title='년도', title_fontsize='13', fontsize='12', frameon=True, loc='best', borderaxespad=1, edgecolor='black')
 
 plt.tight_layout()
+
+# 막대 그래프 이미지로 저장
+plt.savefig('bar_plot.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 # 데이터 정렬 및 기타 항목 처리
@@ -105,6 +108,9 @@ def plot_pie_charts(data_2022, data_2023, title1, title2):
     ax2.set_aspect('equal', adjustable='box')
 
     plt.tight_layout()
+
+    # 원형 차트 이미지로 저장
+    plt.savefig('pie_charts.png', dpi=300, bbox_inches='tight')
     plt.show()
 
 # 2022년도와 2023년도 원형 차트를 한 프레임에 표시
