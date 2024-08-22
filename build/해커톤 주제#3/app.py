@@ -6,12 +6,14 @@ import seaborn as sns
 from io import BytesIO
 from fpdf import FPDF 
 from PyPDF2 import PdfMerger
-
-from data import process_data, process_2data, process_3data, process_cause
-
 from xlsxwriter import *
+
+from data import process_data, process_2data, process_3data, process_4data 
+
 from mf_exp_sum import manufacturing_1data
 from raw_ma_sum import manufacturing_2data, manufacturing_3data
+from cost_sum import manufacturing_4data
+
 from visual import visual
 from pdf_merge import merge_pdfs
 from report import generate_pdf, generate_pdf2
@@ -38,14 +40,21 @@ def index():
         onebool_2023 = process_3data(files)
         onebool_2023 = manufacturing_3data(onebool_2023)
         visual(df) #데이터를 시각화 해주는 matplot 호출 함수 visual.py에 있는 함수
-        merged_df = pd.merge(onebool_2022, onebool_2023)
         
+        merged_df = pd.merge(onebool_2022, onebool_2023)
+ 
+        cost_2022 = process_4data(files)
+        cost_2022 = manufacturing_4data(cost_2022)
+        
+                
 
 
         pdf1 = generate_pdf(df)
         pdf2 = generate_pdf2(merged_df)
+        #pdf3 = generate_pdf3(cost_2022)
         
-        # pdf 병합
+        # pdf 병합 
+        #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2)
         merged_pdf_buffer = merge_pdfs(pdf1, pdf2)
         
 

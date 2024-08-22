@@ -2,7 +2,11 @@ import pandas as pd
 
 # 필요한 칼럼만 선택 (계정명, 등록일, 차변)
 def manufacturing_1data(df):
-    df_filtered = df[0].loc[:, ['계정명', '등록일', '차변']]
+    # 만약 df가 리스트로 전달되었다면 df[0]을 사용하고, 그렇지 않다면 df를 사용
+    if isinstance(df, list):
+        df_filtered = df[0].loc[:, ['계정명', '등록일', '차변']]
+    else:
+        df_filtered = df.loc[:, ['계정명', '등록일', '차변']]
 
     # 등록일에서 년도만 추출
     df_filtered.loc[:, '년도'] = pd.to_datetime(df_filtered['등록일']).dt.year
