@@ -7,7 +7,7 @@ from io import BytesIO
 from fpdf import FPDF 
 from PyPDF2 import PdfMerger
 
-from data import process_data, process_2data, process_3data, process_cause, analyze
+from data import process_data, process_2data, process_3data, process_cause
 
 from xlsxwriter import *
 from mf_exp_sum import manufacturing_1data

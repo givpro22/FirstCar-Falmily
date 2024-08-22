@@ -5,8 +5,8 @@ def generate_pdf(dataframe):
     pdf = FPDF()
     pdf.add_page()
     # 유니코드 폰트 추가
-    pdf.add_font('HMFMPYUN', '', "HMFMPYUN.ttf", uni=True)
-    pdf.set_font('HMFMPYUN', size=10)
+    pdf.add_font('Nanum', '', "C:/Users/jeong/OneDrive/바탕 화면/NanumGothic/NanumGothic-Regular.ttf", uni=True)
+    pdf.set_font('Nanum', size=10)
     
     # 테이블 헤더 작성
     col_widths = [50, 30, 30, 50]  # 열 너비 설정
