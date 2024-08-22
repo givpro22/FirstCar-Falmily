@@ -19,7 +19,7 @@ from visual import visual
 from pdf_merge import merge_pdfs
 
 from report import generate_pdf, generate_pdf2, generate_pdf3
-#from main_report import main_generate_pdf
+from main_report import main_generate_pdf
 
 from example import example #여기는 이제 example 예시라 나중에 삭제 해야함
 
@@ -49,6 +49,7 @@ def index():
  
         cost_2022 = process_4data(files)
         cost_2022_worst = manufacturing_4_worstdata(cost_2022)
+        example(cost_2022_worst)
         #cost_2022_best = 
         #cost_2023 = process_5data(files)                             이거 만들어야 함
         #cost_2023 = manufacturing_5data(cost_2022)
@@ -58,11 +59,11 @@ def index():
         pdf1 = generate_pdf(df)
         pdf2 = generate_pdf2(merged_df)
         pdf3 = generate_pdf3(cost_2022_worst)         
-        #main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2022)
+        main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2022)
         
         # pdf 병합 
         #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2, main_pdf)        이거 구현해야 함(채민이 부분)
-        merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2) #위에 만들어지면 지우고
+        merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2, main_pdf) #위에 만들어지면 지우고
         
 
           # 파일 포인터를 시작 위치로 이동
