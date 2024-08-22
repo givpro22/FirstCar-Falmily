@@ -19,7 +19,7 @@ from visual import visual
 from pdf_merge import merge_pdfs
 
 from report import generate_pdf, generate_pdf2, generate_pdf3
-from main_report import main_generate_pdf
+#from main_report import main_generate_pdf
 
 from example import example #여기는 이제 example 예시라 나중에 삭제 해야함
 

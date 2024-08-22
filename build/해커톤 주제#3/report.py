@@ -133,7 +133,7 @@ def add_cover_page(pdf):
 
 def generate_pdf(dataframe):
     pdf = create_pdf_object()
-    add_cover_page(pdf)  # 표지 추가, 한 번만 호출
+    
 
     pdf.add_page()  # 내용 시작할 페이지 추가
 
@@ -287,6 +287,7 @@ def generate_pdf2(dataframe):
 
 def generate_pdf3(dataframe):
     pdf = create_pdf_object()
+    add_cover_page(pdf)  # 표지 추가, 한 번만 호출
     pdf.add_page()  # 새로운 페이지 추가
 
     # 보고서 제목 설정
