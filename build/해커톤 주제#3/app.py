@@ -21,7 +21,7 @@ from pdf_merge import merge_pdfs
 from report import generate_pdf, generate_pdf2
 from main_report import main_generate_pdf
 
-
+from example import example #여기는 이제 example 예시라 나중에 삭제 해야함
 
 #민혁 hi aaaaa
 #수정 test 채민
@@ -36,6 +36,7 @@ def index():
         files = request.files.getlist('file')  # 업로드된 파일들 가져오기
         df = process_data(files)  # 데이터 전처리 함수 호출 data.py에 있는 함수. finish
         df = manufacturing_1data(df)  # 데이터 가공 함수 호출 mf_exp_sum.py에 있는 함수
+        print(df)
         
         # 엑셀 파일을 메모리에 저장
         onebool_2022 = process_2data(files)
@@ -60,7 +61,7 @@ def index():
         #main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2022)
         
         # pdf 병합 
-        #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2)        이거 구현해야 함(채민이 부분)
+        #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2, main_pdf)        이거 구현해야 함(채민이 부분)
         merged_pdf_buffer = merge_pdfs(pdf1, pdf2) #위에 만들어지면 지우고
         
 
