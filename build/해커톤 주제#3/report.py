@@ -1,78 +1,3 @@
-# from fpdf import FPDF
-# import pandas as pd
-
-# def generate_pdf(dataframe):
-#     pdf = FPDF()
-#     pdf.add_page()
-#     # 유니코드 폰트 추가
-#     pdf.add_font('Nanum', '', "C:NanumGothic-Regular.ttf", uni=True)
-#     pdf.set_font('Nanum', size=10)
-    
-#     # 테이블 헤더 작성
-#     col_widths = [50, 30, 30, 50]  # 열 너비 설정
-#     pdf.cell(col_widths[0], 10, '계정명', border=1, align='C')
-#     pdf.cell(col_widths[1], 10, '2022년', border=1, align='C')
-#     pdf.cell(col_widths[2], 10, '2023년', border=1, align='C')
-#     pdf.cell(col_widths[3], 10, '전기대비 증감율', border=1, align='C')
-#     pdf.ln()
-
-#     # 데이터프레임의 각 행을 PDF에 추가
-#     for index, row in dataframe.iterrows():
-#         pdf.cell(col_widths[0], 10, str(row['계정명']), border=1)
-#         pdf.cell(col_widths[1], 10, f"{int(row['2022년']):,}", border=1, align='R')
-#         pdf.cell(col_widths[2], 10, f"{int(row['2023년']):,}", border=1, align='R')
-#         pdf.cell(col_widths[3], 10, str(row['전기대비 증감율']), border=1, align='R')
-#         pdf.ln()
-
-#     return pdf
-
-# def generate_pdf2(dataframe):
-#     pdf = FPDF()
-#     pdf.add_page()
-#     # 유니코드 폰트 추가
-#     pdf.add_font('Nanum', '', "C:NanumGothic-Regular.ttf", uni=True)
-#     pdf.set_font('Nanum', size=10)
-    
-#     # 테이블 헤더 작성
-#     col_widths = [50, 40, 50, 40]  # 열 너비 설정
-#     pdf.cell(col_widths[0], 10, '원재료명', border=1, align='C')
-#     pdf.cell(col_widths[1], 10, '2022 총 출고량', border=1, align='C')
-#     pdf.cell(col_widths[2], 10, '원재료명', border=1, align='C')
-#     pdf.cell(col_widths[3], 10, '2023 총 출고량', border=1, align='C')
-#     pdf.ln()
-
-#     # 데이터프레임의 각 행을 PDF에 추가
-#     for index, row in dataframe.iterrows():
-#         pdf.cell(col_widths[0], 10, str(row['원재료명']), border=1)
-#         pdf.cell(col_widths[1], 10, str(row.get('2022 총 출고량', '')), border=1, align='R')
-#         pdf.cell(col_widths[2], 10, str(row['원재료명']), border=1, align = "R")
-#         pdf.cell(col_widths[3], 10, str(row.get('2023 총 출고량', '')), border=1, align='R')
-#         pdf.ln()
-
-#     return pdf
-
-# def generate_pdf3(dataframe):
-#     pdf = FPDF()
-#     pdf.add_page()
-    
-#     # 유니코드 폰트 추가
-#     pdf.add_font('Nanum', '', "C:/Users/jeong/OneDrive/바탕 화면/NanumGothic/NanumGothic-Regular.ttf", uni=True)
-#     pdf.set_font('Nanum', size=10)
-    
-#     # 테이블 헤더 작성
-#     col_widths = [60, 120]  # 열 너비 설정 (필요에 따라 조정)
-#     pdf.cell(col_widths[0], 10, '항목', border=1, align='C')
-#     pdf.cell(col_widths[1], 10, '증감 추이의 원인', border=1, align='C')
-#     pdf.ln()
-
-#     # 데이터프레임의 각 행을 PDF에 추가
-#     for index, row in dataframe.iterrows():
-#         pdf.cell(col_widths[0], 10, str(row['항목']), border=1)
-#         pdf.cell(col_widths[1], 10, str(row['증감 추이의 원인']), border=1)
-#         pdf.ln()
-
-#     return pdf
-
 from fpdf import FPDF
 from datetime import datetime
 
@@ -133,8 +58,6 @@ def add_cover_page(pdf):
 
 def generate_pdf(dataframe):
     pdf = create_pdf_object()
-    
-
     pdf.add_page()  # 내용 시작할 페이지 추가
 
     # 테이블 제목 추가
@@ -149,14 +72,18 @@ def generate_pdf(dataframe):
     start_x = (pdf.w - table_width) / 2  # 테이블을 중앙에 배치하기 위한 시작 x 좌표
     pdf.set_x(start_x)
 
-    pdf.set_font('Nanum', 'B', 10)
+    pdf.set_font('Nanum', 'B', 12)
+    pdf.set_fill_color(128, 0, 0)  # 어두운 빨간색 배경
+    pdf.set_text_color(255, 255, 255)  # 흰색 텍스트
+
     headers = ['계정명', '2022년', '2023년', '전기대비 증감율']
-    for i, header in enumerate(headers):
-        pdf.cell(col_widths[i], 10, header, border=1, align='C')
+    for width, header in zip(col_widths, headers):
+        pdf.cell(width, 10, header, border=1, align='C', fill=True)
     pdf.ln()
 
     # 테이블 내용 추가
     pdf.set_font('Nanum', '', 10)
+    pdf.set_text_color(0, 0, 0)  # 검은색 텍스트로 초기화
     for index, row in dataframe.iterrows():
         pdf.set_x(start_x)
         pdf.cell(col_widths[0], 10, str(row['계정명']), border=1)
@@ -176,21 +103,26 @@ def generate_pdf2(dataframe):
     pdf.cell(0, 10, '원재료 요약 (2022년 vs 2023년)', ln=True, align='C')
     pdf.ln(10)
 
-    # 테이블 헤더 설정
+    # 열 너비 설정
     col_widths = [50, 40, 50, 40]  # 열 너비 설정
+
+    # 테이블 헤더 설정
+    pdf.set_font('Nanum', 'B', 12)
+    pdf.set_fill_color(128, 0, 0)  # 어두운 빨간색 배경
+    pdf.set_text_color(255, 255, 255)  # 흰색 텍스트
 
     table_width = sum(col_widths)
     start_x = (pdf.w - table_width) / 2  # 테이블을 중앙에 배치하기 위한 시작 x 좌표
     pdf.set_x(start_x)
 
-    pdf.set_font('Nanum', 'B', 10)
     headers = ['원재료명 (2022)', '총 출고량 (2022)', '원재료명 (2023)', '총 출고량 (2023)']
-    for i, header in enumerate(headers):
-        pdf.cell(col_widths[i], 10, header, border=1, align='C')
+    for width, header in zip(col_widths, headers):
+        pdf.cell(width, 10, header, border=1, align='C', fill=True)
     pdf.ln()
 
     # 테이블 내용 추가
     pdf.set_font('Nanum', '', 10)
+    pdf.set_text_color(0, 0, 0)  # 검은색 텍스트로 초기화
     for index, row in dataframe.iterrows():
         pdf.set_x(start_x)
         pdf.cell(col_widths[0], 10, str(row['원재료명']), border=1)
@@ -200,90 +132,6 @@ def generate_pdf2(dataframe):
         pdf.ln()
 
     return pdf
-
-# def generate_pdf3(dataframe):
-#     pdf = create_pdf_object()
-
-#     # PDF 객체 생성
-#     pdf = FPDF()
-#     pdf.add_page()
-    
-#     # 폰트 설정
-#     pdf.set_font('Nanum', '', 10)
-    
-#     # 제목 추가
-#     pdf.cell(200, 10, txt="Top 5 Worst Data", ln=True, align='C')
-#     pdf.ln(10)
-    
-#     # 데이터프레임의 각 행을 PDF에 추가
-#     for index, row in dataframe.iterrows():
-#         pdf.cell(200, 10, txt=f"제품명: {index}", ln=True)
-#         for col_name, value in row.items():
-#             pdf.cell(200, 10, txt=f"{col_name}: {value}", ln=True)
-#         pdf.ln(5)
-    
-#     return pdf
-
-# def generate_pdf3(dataframe_best, dataframe_worst):
-#     pdf = create_pdf_object()
-#     pdf.add_page()  # 새로운 페이지 추가
-
-#     # 보고서 제목 설정
-#     pdf.set_font('Nanum', 'B', 20)
-#     pdf.cell(0, 10, 'FY2023 원가율 BEST 10', ln=False, align='L')
-#     pdf.cell(0, 10, 'FY2023 원가율 WORST 10', ln=True, align='R')
-#     pdf.set_font('Nanum', '', 12)
-#     pdf.cell(0, 10, '(단위: 원)', ln=True, align='R')
-#     pdf.ln(5)
-
-#     # 테이블 시작 좌표 설정
-#     best_x_start = 10  # BEST 10 테이블 시작 위치
-#     worst_x_start = 105  # WORST 10 테이블 시작 위치
-
-#     # 열 너비 설정
-#     col_widths = [30, 25, 35, 25, 25]
-
-#     # BEST 10 테이블 헤더
-#     pdf.set_font('Nanum', 'B', 12)
-#     pdf.set_fill_color(128, 0, 0)  # 어두운 빨간색 배경
-#     pdf.set_text_color(255, 255, 255)  # 흰색 텍스트
-#     pdf.set_x(best_x_start)
-#     headers = ['제품명', '당기생산수량', '제품 단위별 생산원가', '제품 단위별 판매단가', '제품 단위별 원가율']
-#     for width, header in zip(col_widths, headers):
-#         pdf.cell(width, 10, header, border=1, align='C', fill=True)
-#     pdf.ln()
-
-#     # BEST 10 테이블 내용
-#     pdf.set_font('Nanum', '', 10)
-#     pdf.set_text_color(0, 0, 0)  # 검은색 텍스트
-#     for index, row in dataframe_best.iterrows():
-#         pdf.set_x(best_x_start)
-#         pdf.cell(col_widths[0], 10, str(row['제품명']), border=1)
-#         pdf.cell(col_widths[1], 10, str(row['당기생산수량']), border=1, align='R')
-#         pdf.cell(col_widths[2], 10, f"{int(row['제품 단위별 생산원가']):,}", border=1, align='R')
-#         pdf.cell(col_widths[3], 10, f"{int(row['제품 단위별 판매단가']):,}", border=1, align='R')
-#         pdf.cell(col_widths[4], 10, f"{row['제품 단위별 원가율']:.2f}%", border=1, align='R')
-#         pdf.ln()
-
-#     # WORST 10 테이블 헤더
-#     pdf.set_x(worst_x_start)
-#     for width, header in zip(col_widths, headers):
-#         pdf.cell(width, 10, header, border=1, align='C', fill=True)
-#     pdf.ln()
-
-#     # WORST 10 테이블 내용
-#     pdf.set_font('Nanum', '', 10)
-#     pdf.set_text_color(0, 0, 0)  # 검은색 텍스트
-#     for index, row in dataframe_worst.iterrows():
-#         pdf.set_x(worst_x_start)
-#         pdf.cell(col_widths[0], 10, str(row['제품명']), border=1)
-#         pdf.cell(col_widths[1], 10, str(row['당기생산수량']), border=1, align='R')
-#         pdf.cell(col_widths[2], 10, f"{int(row['제품 단위별 생산원가']):,}", border=1, align='R')
-#         pdf.cell(col_widths[3], 10, f"{int(row['제품 단위별 판매단가']):,}", border=1, align='R')
-#         pdf.cell(col_widths[4], 10, f"{row['제품 단위별 원가율']:.2f}%", border=1, align='R')
-#         pdf.ln()
-
-#     return pdf
 
 def generate_pdf3(dataframe):
     pdf = create_pdf_object()
