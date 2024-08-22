@@ -164,7 +164,7 @@ def plot_pie_charts(data_2022, data_2023, title1, title2):
 
     # 원형 차트 이미지로 저장
     plt.savefig(os.path.join(output_dir, 'pie_charts.png'), dpi=300, bbox_inches='tight')
-    plt.show()
+   
 
 def visual(df_pivot):
     sns.set(style="whitegrid")
