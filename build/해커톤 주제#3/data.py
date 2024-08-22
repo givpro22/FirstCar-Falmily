@@ -35,6 +35,14 @@ def process_4data(files):
             afs.append(af)
     return afs
 
+def process_5data(files):
+    afs = []
+    for file in files:
+        if file.filename.startswith('결산_엑셀_2022'):
+            af = pd.read_excel(file)
+            afs.append(af)
+    return afs
+
 def analyze_sentiment(text):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",

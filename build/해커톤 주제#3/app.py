@@ -8,7 +8,7 @@ from fpdf import FPDF
 from PyPDF2 import PdfMerger
 from xlsxwriter import *
 
-from data import process_data, process_2data, process_3data, process_4data
+from data import process_data, process_2data, process_3data, process_4data, process_5data
 
 from sum.mf_exp_sum import manufacturing_1data
 from sum.raw_ma_sum import manufacturing_2data, manufacturing_3data
@@ -36,7 +36,7 @@ def index():
         files = request.files.getlist('file')  # 업로드된 파일들 가져오기
         df = process_data(files)  # 데이터 전처리 함수 호출 data.py에 있는 함수. finish
         df = manufacturing_1data(df)  # 데이터 가공 함수 호출 mf_exp_sum.py에 있는 함수
-        print(df)
+  
         
         # 엑셀 파일을 메모리에 저장
         onebool_2022 = process_2data(files)
@@ -53,13 +53,16 @@ def index():
         cost_2023 = process_4data(files)                             
         cost_2023_best = manufacturing_5_bestdata(cost_2023)
 
+        cost_2022 = process_5data(files)
+        cost_2022 = manufacturing_5_bestdata(cost_2022)
+
 
         #여기는 pdf 만드는 함수 호출
         pdf1 = generate_pdf(df)
         pdf2 = generate_pdf2(merged_df)
         pdf3 = generate_pdf3(cost_2023_worst) 
         pdf4 = generate_pdf4(cost_2023_best)     
-        main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2023_worst)
+        main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2023_worst,cost_2023_best, cost_2022)
         
         # pdf 병합 
         #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2, main_pdf)        이거 구현해야 함(채민이 부분)
