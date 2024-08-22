@@ -22,13 +22,6 @@ def manufacturing_0data(df):
     # 2022년, 2023년, 증감율 계산
     df_pivot['전기대비 증감율'] = (df_pivot[2023] - df_pivot[2022]) / df_pivot[2022] * 100
 
-    # 인덱스를 컬럼으로 변환
-    #df_pivot = df_pivot.rename(columns={2022: '2022년', 2023: '2023년'}).reset_index()
-
-    # 합계 행 추가
-    # total_row = pd.DataFrame([['합계', total_2022, total_2023, None]], columns=['계정명', '2022년', '2023년', '전기대비 증감율'])
-    # df_pivot = pd.concat([df_pivot, total_row], ignore_index=True)
-
     # 결과 정렬 및 출력
     df_pivot = df_pivot.rename(columns={2022: '2022년', 2023: '2023년'})
     df_pivot = df_pivot[['2022년', '2023년', '전기대비 증감율']]
