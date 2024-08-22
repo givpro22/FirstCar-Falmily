@@ -45,7 +45,7 @@ def index():
  
         cost_2022 = process_4data(files)
         cost_2022 = manufacturing_4data(cost_2022)
-        
+        print(cost_2022)
                 
 
 
