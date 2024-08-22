@@ -14,7 +14,7 @@ def manufacturing_4_worstdata(df):
     df_filtered_weight = df_sorted[df_sorted['제품별가중치'] > 0.0005]
     
     # 상위 5개의 데이터만 반환
-    df_top5 = df_filtered_weight.head(5)
+    df_top5 = df_filtered_weight.head(30)
     
     # 결과 데이터 프레임 반환
     return df_top5
@@ -34,7 +34,7 @@ def manufacturing_5_bestdata(df):
     df_filtered_weight = df_sorted[df_sorted['제품별가중치'] > 0.0005]
     
     # 상위 5개의 데이터만 반환
-    df_top5 = df_filtered_weight.head(5)
+    df_top5 = df_filtered_weight.head(30)
     
     # 결과 데이터 프레임 반환
     return df_top5

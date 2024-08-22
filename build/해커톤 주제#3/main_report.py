@@ -49,12 +49,22 @@ def main_generate_pdf(*dataframe):
     # 합계 행에서 2023년과 2022년의 차이 계산
     total_2022 = dataframe[0].loc[dataframe[0]['계정명'] == '합계', '2022년'].values[0]
     total_2023 = dataframe[0].loc[dataframe[0]['계정명'] == '합계', '2023년'].values[0]
-    difference = total_2023 - total_2022
+    difference = total_2022 - total_2023
 
     # 차이값을 텍스트로 표현
-    pdf.cell(0, 10, f"2023년 합계에서 2022년 제조경비(노무비 + 경비) 합계를 뺀 값: {difference:,} 원", ln=True, align='C')
+    pdf.cell(0, 10, f"2022년 합계에서 2023년 제조경비(노무비 + 경비) 합계를 뺀 값: {difference:,} 원", ln=True, align='C')
     
-    #2022년 2023년 제조원가(당기제품 총 생산원가) 합계를 뺀 값
-    
+    for i, (index, row) in enumerate(dataframe[3].iterrows(), start=1):
+        product_name = row['제품명']
+        product_cost_rate = row['제품 단위별 원가율']
+        pdf.cell(0, 10, f"{i}등: {product_name} - 원가율: {product_cost_rate:.2f}%", ln=True, align='L')
+
+
+
+    for i, (index, row) in enumerate(dataframe[3].iterrows(), start=1):
+        product_name = row['제품명']
+        product_cost_rate = row['제품 단위별 원가율']
+        pdf.cell(0, 10, f"{i}등: {product_name} - 원가율: {product_cost_rate:.2f}%", ln=True, align='L')
+
     
     return pdf
