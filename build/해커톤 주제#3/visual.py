@@ -53,6 +53,9 @@ def plot_pie_charts(data_2022, data_2023, title1, title2):
     ax2.set_aspect('equal', adjustable='box')
 
     plt.tight_layout()
+
+    # 원형 차트 이미지로 저장
+    plt.savefig('pie_charts.png', dpi=300, bbox_inches='tight')
     plt.show()
 
 def visual(df_pivot):
@@ -79,6 +82,9 @@ def visual(df_pivot):
     plt.legend(title='년도', title_fontsize='13', fontsize='12', frameon=True, loc='best', borderaxespad=1, edgecolor='black')
 
     plt.tight_layout()
+
+    # 막대 그래프 이미지로 저장
+    plt.savefig('bar_plot.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     # 데이터 정렬 및 기타 항목 처리
