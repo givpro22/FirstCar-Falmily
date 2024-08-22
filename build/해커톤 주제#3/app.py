@@ -23,8 +23,7 @@ from main_report import main_generate_pdf
 
 from example import example #여기는 이제 example 예시라 나중에 삭제 해야함
 
-#민혁 hi aaaaa
-#수정 test 채민
+from GPT import gPT, generate_final_result_pdf
 
 app = Flask(__name__)
 
@@ -61,7 +60,8 @@ def index():
         cost_2022 = process_5data(files)
 
         interview = process_6data(files)
-        #민혁이가 함수(interview)
+        gPT1 = gPT(interview[0])
+        pdf5 = generate_final_result_pdf(gPT1)
 
         #여기는 pdf 만드는 함수 호출
         pdf1 = generate_pdf(df)
@@ -72,7 +72,7 @@ def index():
         
         # pdf 병합 
         #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2, main_pdf)        이거 구현해야 함(채민이 부분)
-        merged_pdf_buffer = merge_pdfs(pdf4, pdf3, pdf1, pdf2, main_pdf) #위에 만들어지면 지우고
+        merged_pdf_buffer = merge_pdfs(pdf4, pdf3, pdf1, pdf2, main_pdf, pdf5) #위에 만들어지면 지우고
         
 
           # 파일 포인터를 시작 위치로 이동
