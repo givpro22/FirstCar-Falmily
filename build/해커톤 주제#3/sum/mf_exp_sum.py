@@ -36,5 +36,4 @@ def manufacturing_1data(df):
 
     # 결과 정렬 및 출력
     df_pivot = df_pivot[['계정명', '2022년', '2023년', '전기대비 증감율']]
-
     return df_pivot
