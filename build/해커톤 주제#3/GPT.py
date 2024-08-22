@@ -11,7 +11,6 @@ from io import StringIO
 def gPT(df_2):
     # DataFrame을 텍스트로 변환
     df_text_2 = df_2.to_csv(index=False)
-
     system_query = '''당신은 기업 경영 개선을 위한 분석을 논리적으로 도와주는 유용한 조수입니다.
     제공한 고객사 인터뷰 내용 중 맨위 두줄만 출력하시오
     '''
