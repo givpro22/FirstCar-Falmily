@@ -10,9 +10,9 @@ from xlsxwriter import *
 
 from data import process_data, process_2data, process_3data, process_4data 
 
-from mf_exp_sum import manufacturing_1data
-from raw_ma_sum import manufacturing_2data, manufacturing_3data
-from cost_sum import manufacturing_4data
+from sum.mf_exp_sum import manufacturing_1data
+from sum.raw_ma_sum import manufacturing_2data, manufacturing_3data
+from sum.cost_sum import manufacturing_4data
 
 from visual import visual
 from pdf_merge import merge_pdfs

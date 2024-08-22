@@ -187,6 +187,4 @@ def visual(df_pivot):
     plt.tight_layout()
 
     plt.savefig(os.path.join(output_dir, 'bar_plot.png'), dpi=300, bbox_inches='tight')
-    plt.show()
-
     plot_pie_charts(df_pivot_sorted_2022['2022년'], df_pivot_sorted_2023['2023년'], '2022년 차변 분포', '2023년 차변 분포')
