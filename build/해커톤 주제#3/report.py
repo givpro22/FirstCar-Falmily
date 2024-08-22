@@ -79,7 +79,7 @@ import os
 class PDF(FPDF):
     def header(self):
         # 로고 추가 (로고 파일 경로에 맞게 수정)
-        self.image('C:/Users/214484/Desktop/ocoals/FirstCar-Family/build/해커톤 주제#5/assets/frame0/image_1.png', 10, 8, 33)
+        self.image('mage_1.png', 10, 8, 33)
         self.set_font('Nanum', 'B', 12)
         self.cell(0, 10, '기업 보고서', align='C', ln=True, border=False)
         self.ln(10)
