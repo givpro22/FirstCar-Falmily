@@ -95,8 +95,8 @@ def create_pdf_object():
     
     # 한글 폰트 추가 및 설정
     # 경로는 실제 폰트 파일이 있는 경로로 수정해야 합니다.
-    pdf.add_font('Nanum', '', 'C:/Users/214484/Desktop/NanumGothic-Regular.ttf', uni=True)
-    pdf.add_font('Nanum', 'B', 'C:/Users/214484/Desktop/NanumGothic-Bold.ttf', uni=True)
+    pdf.add_font('Nanum', '', 'NanumGothic-Regular.ttf', uni=True)
+    pdf.add_font('Nanum', 'B', 'NanumGothic-Bold.ttf', uni=True)
     
     pdf.add_page()
     pdf.set_font('Nanum', size=10)
