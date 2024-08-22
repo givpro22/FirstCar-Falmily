@@ -12,7 +12,7 @@ from data import process_data, process_2data, process_3data, process_4data
 
 from sum.mf_exp_sum import manufacturing_1data
 from sum.raw_ma_sum import manufacturing_2data, manufacturing_3data
-from sum.cost_sum import manufacturing_4data
+from sum.cost_sum import manufacturing_4_worstdata
 
 from visual import visual
 
@@ -48,8 +48,8 @@ def index():
         merged_df = pd.merge(onebool_2022, onebool_2023)
  
         cost_2022 = process_4data(files)
-        cost_2022_worst = manufacturing_4data(cost_2022)
-        cost_2022_best = 
+        cost_2022_worst = manufacturing_4_worstdata(cost_2022)
+        #cost_2022_best = 
         print(cost_2022)
         #cost_2023 = process_5data(files)                             이거 만들어야 함
         #cost_2023 = manufacturing_5data(cost_2022)
