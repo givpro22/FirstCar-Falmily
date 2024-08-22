@@ -10,7 +10,7 @@ from xlsxwriter import *
 
 from data import process_data, process_2data, process_3data, process_4data, process_5data, process_6data
 
-from sum.mf_exp_sum import manufacturing_1data
+from sum.mf_exp_sum import manufacturing_1data, manufacturing_0data
 from sum.raw_ma_sum import manufacturing_2data, manufacturing_3data
 from sum.cost_sum import manufacturing_4_worstdata, manufacturing_5_bestdata
 
@@ -35,8 +35,12 @@ def index():
     if request.method == 'POST':
         files = request.files.getlist('file')  # 업로드된 파일들 가져오기
         df = process_data(files)  # 데이터 전처리 함수 호출 data.py에 있는 함수. finish
+        
+        df1 = manufacturing_0data(df) # matplotlib 시각화를 위한 전처리 코드
+        visual(df1) #데이터를 시각화 해주는 matplot 호출 함수 visual.py에 있는 함수
         df = manufacturing_1data(df)  # 데이터 가공 함수 호출 mf_exp_sum.py에 있는 함수
         
+
         
         # 엑셀 파일을 메모리에 저장
         onebool_2022 = process_2data(files)
@@ -45,7 +49,6 @@ def index():
         onebool_2023 = process_3data(files)
         onebool_2023 = manufacturing_3data(onebool_2023)
         
-        visual(df) #데이터를 시각화 해주는 matplot 호출 함수 visual.py에 있는 함수
         
         merged_df = pd.merge(onebool_2022, onebool_2023)
  
