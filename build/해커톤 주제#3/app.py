@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from io import BytesIO
 from fpdf import FPDF  # fpdf2 라이브러리에서 'fpdf' 모듈을 사용
-from pdf_merge import merge_pdfs
+from PyPDF2 import PdfMerger
 
 from data import process_data
 from data import process_2data, process_3data
@@ -15,13 +15,37 @@ from mf_exp_sum import manufacturing_1data
 from raw_ma_sum import manufacturing_2data, manufacturing_3data
 from visual import visual
 
+def merge_pdfs(pdf1, pdf2):
+    merger = PdfMerger()
+
+    # 첫 번째 PDF를 메모리로 저장
+    pdf1_buffer = BytesIO()
+    pdf1.output(pdf1_buffer)
+    pdf1_buffer.seek(0)
+
+    # 두 번째 PDF를 메모리로 저장
+    pdf2_buffer = BytesIO()
+    pdf2.output(pdf2_buffer)
+    pdf2_buffer.seek(0)
+
+    # 병합 작업 수행
+    merger.append(pdf1_buffer)
+    merger.append(pdf2_buffer)
+
+    # 병합된 결과를 메모리에 저장
+    merged_pdf_buffer = BytesIO()
+    merger.write(merged_pdf_buffer)
+    merged_pdf_buffer.seek(0)  # 파일 포인터를 시작 위치로 이동
+
+    return merged_pdf_buffer
+
 #from report import generate_pdf
 def generate_pdf(dataframe):
     pdf = FPDF()
     pdf.add_page()
     # 유니코드 폰트 추가
-    pdf.add_font('Nanum', '', "C:/Users/jeong/OneDrive/바탕 화면/NanumGothic/NanumGothic-Regular.ttf", uni=True)
-    pdf.set_font('Nanum', size=10)
+    pdf.add_font('HMFMPYUN', '', "HMFMPYUN.TTF", uni=True)
+    pdf.set_font('HMFMPYUN', size=10)
     
     # 테이블 헤더 작성
     col_widths = [50, 30, 30, 50]  # 열 너비 설정
@@ -45,8 +69,8 @@ def generate_pdf2(dataframe):
     pdf = FPDF()
     pdf.add_page()
     # 유니코드 폰트 추가
-    pdf.add_font('Nanum', '', "C:/Users/jeong/OneDrive/바탕 화면/NanumGothic/NanumGothic-Regular.ttf", uni=True)
-    pdf.set_font('Nanum', size=10)
+    pdf.add_font('HMFMPYUN', '', "HMFMPYUN.TTF", uni=True)
+    pdf.set_font('HMFMPYUN', size=10)
     
     # 테이블 헤더 작성
     col_widths = [50, 40, 50, 40]  # 열 너비 설정
@@ -65,6 +89,7 @@ def generate_pdf2(dataframe):
         pdf.ln()
 
     return pdf
+
 
 
 #민혁 hi aaaaa
@@ -93,6 +118,7 @@ def index():
 
         # pdf 병합
         merged_pdf_buffer = merge_pdfs(pdf1, pdf2)
+        
 
           # 파일 포인터를 시작 위치로 이동
         # 생성된 PDF 파일을 다운로드할 수 있게 반환
