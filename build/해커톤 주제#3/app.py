@@ -40,7 +40,6 @@ def generate_pdf(dataframe):
         pdf.ln()
 
     return pdf
-from fpdf import FPDF
 
 def generate_pdf2(dataframe):
     pdf = FPDF()
