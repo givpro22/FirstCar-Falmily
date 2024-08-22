@@ -11,5 +11,8 @@ def manufacturing_4data(df):
     # 피벗 테이블로 변환 (피벗이 필요없다면 이 단계는 생략 가능)
     df_pivot = df_filtered.pivot_table(index='제품명', values=required_columns[1:], aggfunc='sum')
     
+    # '제품 단위별 원가율'로 정렬
+    df_pivot_sorted = df_pivot.sort_values(by='제품 단위별 원가율', ascending=False)
+    
     # 결과 데이터 프레임 반환
-    return df_pivot
+    return df_pivot_sorted

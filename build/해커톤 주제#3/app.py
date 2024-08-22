@@ -15,8 +15,11 @@ from sum.raw_ma_sum import manufacturing_2data, manufacturing_3data
 from sum.cost_sum import manufacturing_4data
 
 from visual import visual
+
 from pdf_merge import merge_pdfs
+
 from report import generate_pdf, generate_pdf2
+from main_report import main_generate_pdf
 
 
 
@@ -33,6 +36,7 @@ def index():
         files = request.files.getlist('file')  # 업로드된 파일들 가져오기
         df = process_data(files)  # 데이터 전처리 함수 호출 data.py에 있는 함수. finish
         df = manufacturing_1data(df)  # 데이터 가공 함수 호출 mf_exp_sum.py에 있는 함수
+        
         # 엑셀 파일을 메모리에 저장
         onebool_2022 = process_2data(files)
         onebool_2022 = manufacturing_2data(onebool_2022)
@@ -40,22 +44,24 @@ def index():
         onebool_2023 = process_3data(files)
         onebool_2023 = manufacturing_3data(onebool_2023)
         visual(df) #데이터를 시각화 해주는 matplot 호출 함수 visual.py에 있는 함수
-        
         merged_df = pd.merge(onebool_2022, onebool_2023)
  
         cost_2022 = process_4data(files)
         cost_2022 = manufacturing_4data(cost_2022)
         print(cost_2022)
-                
+        #cost_2023 = process_5data(files)                             이거 만들어야 함
+        #cost_2023 = manufacturing_5data(cost_2022)
 
 
+        #여기는 pdf 만드는 함수 호출
         pdf1 = generate_pdf(df)
         pdf2 = generate_pdf2(merged_df)
-        #pdf3 = generate_pdf3(cost_2022)
+        #pdf3 = generate_pdf3(cost_2022)         이거 구현해야 함(채민이 부분)
+        main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2022)
         
         # pdf 병합 
-        #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2)
-        merged_pdf_buffer = merge_pdfs(pdf1, pdf2)
+        #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2)        이거 구현해야 함(채민이 부분)
+        merged_pdf_buffer = merge_pdfs(pdf1, pdf2, main_pdf) #위에 만들어지면 지우고
         
 
           # 파일 포인터를 시작 위치로 이동
