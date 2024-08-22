@@ -54,7 +54,6 @@ def index():
         cost_2023_best = manufacturing_5_bestdata(cost_2023)
 
         cost_2022 = process_5data(files)
-        cost_2022 = manufacturing_5_bestdata(cost_2022)
 
 
         #여기는 pdf 만드는 함수 호출
@@ -62,7 +61,7 @@ def index():
         pdf2 = generate_pdf2(merged_df)
         pdf3 = generate_pdf3(cost_2023_worst) 
         pdf4 = generate_pdf4(cost_2023_best)     
-        main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2023_worst,cost_2023_best, cost_2022)
+        main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2023_worst,cost_2023[0], cost_2022[0])
         
         # pdf 병합 
         #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2, main_pdf)        이거 구현해야 함(채민이 부분)
