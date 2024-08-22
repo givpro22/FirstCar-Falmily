@@ -37,7 +37,7 @@ def index():
 
         onebool_2023 = process_3data(files)
         onebool_2023 = manufacturing_3data(onebool_2023)
-        #visual(df) #데이터를 시각화 해주는 matplot 호출 함수 visual.py에 있는 함수
+        visual(df) #데이터를 시각화 해주는 matplot 호출 함수 visual.py에 있는 함수
         merged_df = pd.merge(onebool_2022, onebool_2023)
         
 

@@ -1,6 +1,16 @@
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from matplotlib import font_manager, rc
+
+# 한글 폰트 설정 (예: 맑은 고딕)
+font_path = "HMFMPYUN.ttf"  # Windows의 경우
+font_name = font_manager.FontProperties(fname=font_path).get_name()
+rc('font', family=font_name)
+
+# 이미지 저장 폴더 설정
+output_dir = 'picture'
 
 def plot_pie_charts(data_2022, data_2023, title1, title2):
     # 3% 이하 항목을 "기타"로 묶기
@@ -55,7 +65,7 @@ def plot_pie_charts(data_2022, data_2023, title1, title2):
     plt.tight_layout()
 
     # 원형 차트 이미지로 저장
-    plt.savefig('pie_charts.png', dpi=300, bbox_inches='tight')
+    plt.savefig(os.path.join(output_dir, 'pie_charts.png'), dpi=300, bbox_inches='tight')
     plt.show()
 
 def visual(df_pivot):
@@ -84,7 +94,7 @@ def visual(df_pivot):
     plt.tight_layout()
 
     # 막대 그래프 이미지로 저장
-    plt.savefig('bar_plot.png', dpi=300, bbox_inches='tight')
+    plt.savefig(os.path.join(output_dir, 'bar_plot.png'), dpi=300, bbox_inches='tight')
     plt.show()
 
     # 데이터 정렬 및 기타 항목 처리
