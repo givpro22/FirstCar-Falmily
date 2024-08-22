@@ -1,6 +1,9 @@
 from fpdf import FPDF
 from datetime import datetime
 
+# 삽입할 이미지 주소
+image_path = r'picture/bar_plot.png'
+
 class PDF(FPDF):
     def __init__(self):
         super().__init__()
