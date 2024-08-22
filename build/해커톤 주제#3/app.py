@@ -47,7 +47,8 @@ def index():
         merged_df = pd.merge(onebool_2022, onebool_2023)
  
         cost_2022 = process_4data(files)
-        cost_2022 = manufacturing_4data(cost_2022)
+        cost_2022_worst = manufacturing_4data(cost_2022)
+        cost_2022_best = 
         print(cost_2022)
         #cost_2023 = process_5data(files)                             이거 만들어야 함
         #cost_2023 = manufacturing_5data(cost_2022)
