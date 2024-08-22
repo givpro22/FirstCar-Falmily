@@ -93,7 +93,20 @@ def visual(df_pivot):
     plt.xticks(rotation=90, fontsize=12, fontproperties=fontprop)
     plt.yticks(fontsize=12, fontproperties=fontprop)
 
-    plt.legend(title='년도', title_fontsize='13', fontsize='12', frameon=True, loc='best', borderaxespad=1, edgecolor='black')
+    # 범례 설정에서 폰트 적용
+    legend = plt.legend(
+        title='연도', 
+        title_fontsize='13', 
+        fontsize='12', 
+        frameon=True, 
+        loc='best', 
+        borderaxespad=1, 
+        edgecolor='black',
+        prop=fontprop  # 범례 항목에 폰트 속성 적용
+    )
+
+    # 범례 제목에 폰트 속성 적용
+    legend.get_title().set_fontproperties(fontprop)
 
     plt.tight_layout()
 

@@ -1,9 +1,6 @@
 from fpdf import FPDF
 from datetime import datetime
 
-# 삽입할 이미지 주소
-image_path = r'picture/bar_plot.png'
-
 class PDF(FPDF):
     def __init__(self):
         super().__init__()
@@ -145,6 +142,25 @@ def generate_pdf2(dataframe):
         pdf.cell(col_widths[2], 10, str(row['원재료명']), border=1, align='R')
         pdf.cell(col_widths[3], 10, f"{int(row.get('2023 총 출고량', 0)):,}", border=1, align='R')
         pdf.ln()
+
+    # 이미지 삽입 부분
+    pdf.ln()  # 테이블과 이미지 사이의 간격
+
+    # 이미지 제목 추가
+    pdf.set_font('Nanum', 'B', 14)
+    pdf.cell(0, 10, '2022년과 2023년 차변 비교', ln=True, align='C')
+    pdf.ln(5)
+
+    # 첫 번째 이미지 삽입 (bar_plot.png)
+    pdf.image('picture/bar_plot.png', x=margin_x, y=None, w=table_width)
+
+    # 두 번째 이미지 삽입 (pie_charts.png)
+    pdf.ln(10)  # 두 이미지 사이의 간격
+
+    pdf.set_font('Nanum', 'B', 14)
+    pdf.cell(0, 10, '2022년 차변 분포 / 2023년 차변 분포', ln=True, align='C')
+    pdf.ln(5)
+    pdf.image('picture/pie_charts.png', x=margin_x, y=None, w=table_width)
 
     return pdf
 
