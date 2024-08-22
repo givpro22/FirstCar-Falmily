@@ -22,8 +22,15 @@ def manufacturing_1data(df):
     # 인덱스를 컬럼으로 변환
     df_pivot = df_pivot.rename(columns={2022: '2022년', 2023: '2023년'}).reset_index()
 
+    # 2022년과 2023년 합계 계산
+    total_2022 = df_pivot['2022년'].sum()
+    total_2023 = df_pivot['2023년'].sum()
+
+    # 합계 행 추가
+    total_row = pd.DataFrame([['합계', total_2022, total_2023, None]], columns=['계정명', '2022년', '2023년', '전기대비 증감율'])
+    df_pivot = pd.concat([df_pivot, total_row], ignore_index=True)
+
     # 결과 정렬 및 출력
     df_pivot = df_pivot[['계정명', '2022년', '2023년', '전기대비 증감율']]
 
-    
     return df_pivot
