@@ -69,11 +69,10 @@ def main_generate_pdf(*dataframe):
         pdf.cell(0, 10, f"{i}등: {product_name} - 원가율: {product_cost_rate:.2f}%", ln=True, align='L')
     pdf.cell(0, 20, f"가 있으며 기업의 재정 불안정을 초례할 수 있으니 해당제품들은 생산량 축소 및 제조 원가 조정이 필수적입니다.", ln=True, align='C')
 
-
-    #Atotal_2022 = dataframe[5].loc[dataframe[0]['계정명'] == '합계', '2022년'].values[0]
-    #Atotal_2023 = dataframe[5].loc[dataframe[0]['계정명'] == '합계', '2023년'].values[0]
-    #Adifference = Atotal_2022 - Atotal_2023
-    #pdf.cell(0, 10, f"2022년 합계에서 2023년 제조경비(노무비 + 경비) 합계를 뺀 값: {Adifference:,} 원", ln=True, align='C')
+    Atotal_2023 = dataframe[4]['당기제품 총생산원가'].sum()
+    Atotal_2022 = dataframe[5]['당기제품 총생산원가'].sum()
+    Adifference = Atotal_2022 - Atotal_2023
+    pdf.cell(0, 10, f"2022년 합계에서 2023년 총 제조 원가(당기제품 총생산원가) 합계를 뺀 값: {Adifference:,} 원", ln=True, align='C')
 
     
     return pdf
