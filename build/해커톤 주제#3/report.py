@@ -5,7 +5,7 @@ def generate_pdf(dataframe):
     pdf = FPDF()
     pdf.add_page()
     # 유니코드 폰트 추가
-    pdf.add_font('Nanum', '', "C:/Users/user/Desktop/NanumGothic-Regular.ttf", uni=True)
+    pdf.add_font('Nanum', '', "C:NanumGothic-Regular.ttf", uni=True)
     pdf.set_font('Nanum', size=10)
     
     # 테이블 헤더 작성
@@ -30,7 +30,7 @@ def generate_pdf2(dataframe):
     pdf = FPDF()
     pdf.add_page()
     # 유니코드 폰트 추가
-    pdf.add_font('Nanum', '', "C:/Users/user/Desktop/NanumGothic-Regular.ttf", uni=True)
+    pdf.add_font('Nanum', '', "C:NanumGothic-Regular.ttf", uni=True)
     pdf.set_font('Nanum', size=10)
     
     # 테이블 헤더 작성
