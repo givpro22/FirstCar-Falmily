@@ -2,6 +2,17 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib.font_manager as fm
+
+# 폰트 경로를 설정
+font_path = 'NanumGothic-Regular.ttf'
+fontprop = fm.FontProperties(fname=font_path)
+
+# Matplotlib에 폰트를 설정
+plt.rc('font', family=fontprop.get_name())
+
+# 기본적으로 음수 기호가 네모로 나오는 경우가 있어 이를 해결
+plt.rcParams['axes.unicode_minus'] = False
 
 # 이미지 저장 폴더 설정
 output_dir = 'picture'
@@ -40,9 +51,9 @@ def plot_pie_charts(data_2022, data_2023, title1, title2):
         startangle=90,
         colors=sns.color_palette("husl", len(data_2022_processed)),
         counterclock=False,
-        textprops={'color': 'black', 'fontsize': 12}
+        textprops={'color': 'black', 'fontsize': 12, 'fontproperties': fontprop}
     )
-    ax1.set_title(title1, fontsize=16)
+    ax1.set_title(title1, fontsize=16, fontproperties=fontprop)
 
     # 두 번째 원형 차트 (2023년도)
     wedges, texts, autotexts = ax2.pie(
@@ -52,9 +63,9 @@ def plot_pie_charts(data_2022, data_2023, title1, title2):
         startangle=90,
         colors=sns.color_palette("husl", len(data_2023_processed)),
         counterclock=False,
-        textprops={'color': 'black', 'fontsize': 12}
+        textprops={'color': 'black', 'fontsize': 12, 'fontproperties': fontprop}
     )
-    ax2.set_title(title2, fontsize=16)
+    ax2.set_title(title2, fontsize=16, fontproperties=fontprop)
 
     # 두 차트가 원형을 유지하도록 설정
     ax1.set_aspect('equal', adjustable='box')
@@ -76,11 +87,11 @@ def visual(df_pivot):
 
     plt.figure(figsize=(10, 6))
     bar_plot = sns.barplot(data=df_melted, x='계정명', y='차변', hue='년도', palette='viridis')
-    plt.title('2022년과 2023년 차변 비교', fontsize=16)
-    plt.xlabel('계정명', fontsize=14)
-    plt.ylabel('차변 금액', fontsize=14)
-    plt.xticks(rotation=90, fontsize=12)
-    plt.yticks(fontsize=12)
+    plt.title('2022년과 2023년 차변 비교', fontsize=16, fontproperties=fontprop)
+    plt.xlabel('계정명', fontsize=14, fontproperties=fontprop)
+    plt.ylabel('차변 금액', fontsize=14, fontproperties=fontprop)
+    plt.xticks(rotation=90, fontsize=12, fontproperties=fontprop)
+    plt.yticks(fontsize=12, fontproperties=fontprop)
 
     plt.legend(title='년도', title_fontsize='13', fontsize='12', frameon=True, loc='best', borderaxespad=1, edgecolor='black')
 
