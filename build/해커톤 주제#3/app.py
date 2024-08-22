@@ -8,11 +8,11 @@ from fpdf import FPDF
 from PyPDF2 import PdfMerger
 from xlsxwriter import *
 
-from data import process_data, process_2data, process_3data, process_4data 
+from data import process_data, process_2data, process_3data, process_4data
 
 from sum.mf_exp_sum import manufacturing_1data
 from sum.raw_ma_sum import manufacturing_2data, manufacturing_3data
-from sum.cost_sum import manufacturing_4_worstdata
+from sum.cost_sum import manufacturing_4_worstdata, manufacturing_5_bestdata
 
 from visual import visual
 
@@ -47,19 +47,19 @@ def index():
         visual(df) #데이터를 시각화 해주는 matplot 호출 함수 visual.py에 있는 함수
         merged_df = pd.merge(onebool_2022, onebool_2023)
  
-        cost_2022 = process_4data(files)
-        cost_2022_worst = manufacturing_4_worstdata(cost_2022)
-        example(cost_2022_worst)
-        #cost_2022_best = 
-        #cost_2023 = process_5data(files)                             이거 만들어야 함
-        #cost_2023 = manufacturing_5data(cost_2022)
+        cost_2023 = process_4data(files)
+        cost_2023_worst = manufacturing_4_worstdata(cost_2023)
+        
+        cost_2023 = process_4data(files)                             
+        cost_2023_best = manufacturing_5_bestdata(cost_2023)
 
 
         #여기는 pdf 만드는 함수 호출
         pdf1 = generate_pdf(df)
         pdf2 = generate_pdf2(merged_df)
-        pdf3 = generate_pdf3(cost_2022_worst)         
-        main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2022)
+        pdf3 = generate_pdf3(cost_2023_worst) 
+        #pdf4 = generate_pdf4(cost_2023_best) 채민아 여기 만들어야 함        
+        main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2023_worst)
         
         # pdf 병합 
         #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2, main_pdf)        이거 구현해야 함(채민이 부분)
