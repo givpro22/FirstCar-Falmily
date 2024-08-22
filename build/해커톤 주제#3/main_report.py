@@ -52,6 +52,9 @@ def main_generate_pdf(*dataframe):
     difference = total_2023 - total_2022
 
     # 차이값을 텍스트로 표현
-    pdf.cell(0, 10, f"2023년 합계에서 2022년 합계를 뺀 값: {difference:,} 원", ln=True, align='C')
-
+    pdf.cell(0, 10, f"2023년 합계에서 2022년 제조경비(노무비 + 경비) 합계를 뺀 값: {difference:,} 원", ln=True, align='C')
+    
+    #2022년 2023년 제조원가(당기제품 총 생산원가) 합계를 뺀 값
+    
+    
     return pdf
