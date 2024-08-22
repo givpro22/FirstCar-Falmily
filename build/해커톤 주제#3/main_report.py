@@ -52,14 +52,20 @@ def main_generate_pdf(*dataframe):
     difference = total_2022 - total_2023
 
     # 차이값을 텍스트로 표현
-    pdf.cell(0, 10, f"2022년 합계에서 2023년 제조경비(노무비 + 경비) 합계를 뺀 값: {difference:,} 원", ln=True, align='C')
+    pdf.cell(0, 10, f"2023 - 2022 제조경비(노무비 + 경비) 차: {difference:,} 원", ln=True, align='C')
+    
+    if difference > 0:
+        pdf.cell(0, 10, f"2023년 제조경비(노무비 + 경비) 합계는 2022년 대비 {difference:,} 원 증가했습니다.", ln=True, align='C')
+    else:
+        pdf.cell(0, 10, f"2023년 제조경비(노무비 + 경비) 합계는 2022년 대비 {abs(difference):,} 원 감소했습니다.", ln=True, align='C')
+    
     
     pdf.cell(0, 20, f"제품의 원가율 Best5는 ", ln=True, align='C')
     for i, (index, row) in enumerate(dataframe[3].head(5).iterrows(), start=1):
         product_name = row['제품명']
         product_cost_rate = row['제품 단위별 원가율']
         pdf.cell(0, 10, f"{i}등: {product_name} - 원가율: {product_cost_rate:.2f}%", ln=True, align='L')
-    pdf.cell(0, 20, f"가 있으며 기업 매출 증가를 위해 해당 제품들은 생산량 확디를 적극적으로 고려해야 함", ln=True, align='C')
+    pdf.cell(0, 20, f"기업 매출 증가를 위해 해당 제품들은 생산량 확대를 적극적으로 고려해야 함", ln=True, align='C')
 
 
     pdf.cell(0, 20, f"제품의 원가율 worst5는 ", ln=True, align='C')
@@ -67,12 +73,17 @@ def main_generate_pdf(*dataframe):
         product_name = row['제품명']
         product_cost_rate = row['제품 단위별 원가율']
         pdf.cell(0, 10, f"{i}등: {product_name} - 원가율: {product_cost_rate:.2f}%", ln=True, align='L')
-    pdf.cell(0, 20, f"가 있으며 기업의 재정 불안정을 초례할 수 있으니 해당제품들은 생산량 축소 및 제조 원가 조정이 필수적입니다.", ln=True, align='C')
+    pdf.cell(0, 20, f"기업의 재정 불안정을 초례할 수 있으니 해당제품들은 생산량 축소 및 제조 원가 조정이 필수적입니다.", ln=True, align='C')
 
     Atotal_2023 = dataframe[4]['당기제품 총생산원가'].sum()
     Atotal_2022 = dataframe[5]['당기제품 총생산원가'].sum()
     Adifference = Atotal_2022 - Atotal_2023
-    pdf.cell(0, 10, f"2022년 합계에서 2023년 총 제조 원가(당기제품 총생산원가) 합계를 뺀 값: {Adifference:,} 원", ln=True, align='C')
+    pdf.cell(0, 10, f"2023 - 2022 제조 원가(당기제품 총생산원가) 차: {Adifference:,} 원", ln=True, align='C')
 
+    if Adifference > 0:
+        pdf.cell(0, 10, f"2023년 제조 원가(당기제품 총생산원가) 합계는 2022년 대비 {Adifference:,} 원 증가했습니다.", ln=True, align='C')
+    else:
+        pdf.cell(0, 10, f"2023년 제조 원가(당기제품 총생산원가) 합계는 2022년 대비 {abs(Adifference):,} 원 감소했습니다.", ln=True, align='C')
+    
     
     return pdf

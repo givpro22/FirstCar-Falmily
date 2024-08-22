@@ -13,10 +13,9 @@ def manufacturing_4_worstdata(df):
     df_sorted = df_filtered_non_zero_cost.sort_values(by='제품 단위별 원가율', ascending=False)
     
     # 제품별 가중치가 0.5 이하인 것들을 모두 삭제
-    df_filtered_weight = df_sorted[df_sorted['제품별가중치'] > 0.0005]
     
     # 상위 5개의 데이터만 반환
-    df_top5 = df_filtered_weight.head(30)
+    df_top5 = df_sorted.head(20)
     
     # 결과 데이터 프레임 반환
     return df_top5
@@ -35,10 +34,9 @@ def manufacturing_5_bestdata(df):
     df_sorted = df_filtered_non_zero_cost.sort_values(by='제품 단위별 원가율', ascending=True)
     
     # 제품별 가중치가 0.5 이하인 것들을 모두 삭제
-    df_filtered_weight = df_sorted[df_sorted['제품별가중치'] > 0.0005]
     
     # 상위 5개의 데이터만 반환
-    df_top5 = df_filtered_weight.head(30)
+    df_top5 = df_sorted.head(20)
     
     # 결과 데이터 프레임 반환
     return df_top5
