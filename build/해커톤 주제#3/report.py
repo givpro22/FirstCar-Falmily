@@ -5,9 +5,10 @@ class PDF(FPDF):
     def __init__(self):
         super().__init__()
         self.alias_nb_pages()  # 전체 페이지 수를 위한 예약 필드
+        self.is_cover_page = False  # 표지 페이지 여부
 
     def header(self):
-        if self.page_no() != 1:  # 첫 페이지(표지) 이후에만 헤더 추가
+        if not self.is_cover_page:  # 표지 페이지가 아니면 헤더 추가
             self.image('image_1.png', 10, 8, 33)
             self.set_font('Nanum', 'B', 12)
             self.cell(0, 10, '기업 보고서', align='C', ln=True)
@@ -16,14 +17,15 @@ class PDF(FPDF):
             self.ln(5)
 
     def footer(self):
-        if self.page_no() != 1:  # 첫 페이지(표지) 이후에만 푸터 추가
+        if not self.is_cover_page:  # 표지 페이지가 아니면 푸터 추가
             self.set_y(-15)
             self.set_draw_color(0, 0, 0)  # 검정색 줄
             self.line(10, self.get_y(), 200, self.get_y())  # 페이지 하단에 줄 긋기
 
             self.set_y(-10)
             self.set_font('Nanum', '', 8)
-            page_number = f'Page {self.page_no()} of {{nb}}'
+            #page_number = f'Page {self.page_no()} of {{nb}}'
+            page_number = f'Page {self.page_no()}'
             self.cell(0, 10, page_number, 0, 0, 'R')
 
 def create_pdf_object():
@@ -36,6 +38,7 @@ def create_pdf_object():
     return pdf
 
 def add_cover_page(pdf):
+    pdf.is_cover_page = True  # 표지 페이지 시작
     pdf.add_page()
 
     # 로고 이미지 중앙에 배치
@@ -55,10 +58,11 @@ def add_cover_page(pdf):
 
     pdf.set_font('Nanum', '', 12)
     pdf.multi_cell(0, 10, '이 보고서는 회사의 재무 상태와 주요 원재료 출고량, 고객 인터뷰 등을 포함한 종합 보고서입니다. 회사 내부 자료로만 사용되며 외부 유출을 금합니다.', align='C')
+    pdf.is_cover_page = False  # 표지 페이지 종료
 
 def generate_pdf(dataframe):
     pdf = create_pdf_object()
-    pdf.add_page()  # 내용 시작할 페이지 추가
+    pdf.add_page()  # 페이지 추가 시 header와 footer가 자동으로 적용됩니다.
 
     # 테이블 제목 추가
     pdf.set_font('Nanum', 'B', 14)
@@ -96,7 +100,7 @@ def generate_pdf(dataframe):
 
 def generate_pdf2(dataframe):
     pdf = create_pdf_object()
-    pdf.add_page()  # 내용 시작할 페이지 추가
+    pdf.add_page()  # 페이지 추가 시 header와 footer가 자동으로 적용됩니다.
 
     # 테이블 제목 추가
     pdf.set_font('Nanum', 'B', 14)
@@ -136,7 +140,7 @@ def generate_pdf2(dataframe):
 def generate_pdf3(dataframe):
     pdf = create_pdf_object()
     add_cover_page(pdf)  # 표지 추가, 한 번만 호출
-    pdf.add_page()  # 새로운 페이지 추가
+    pdf.add_page()  # 페이지 추가 시 header와 footer가 자동으로 적용됩니다.
 
     # 보고서 제목 설정
     pdf.set_font('Nanum', 'B', 20)
