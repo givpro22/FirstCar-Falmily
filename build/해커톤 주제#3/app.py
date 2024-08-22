@@ -48,9 +48,8 @@ def index():
         merged_df = pd.merge(onebool_2022, onebool_2023)
  
         cost_2022 = process_4data(files)
-        cost_2022_worst = manufacturing_4_worstdata(cost_2022_worst)
+        cost_2022_worst = manufacturing_4_worstdata(cost_2022)
         #cost_2022_best = 
-        print(cost_2022)
         #cost_2023 = process_5data(files)                             이거 만들어야 함
         #cost_2023 = manufacturing_5data(cost_2022)
 
@@ -58,12 +57,12 @@ def index():
         #여기는 pdf 만드는 함수 호출
         pdf1 = generate_pdf(df)
         pdf2 = generate_pdf2(merged_df)
-        #pdf3 = generate_pdf3(cost_2022)         
+        pdf3 = generate_pdf3(cost_2022_worst)         
         #main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2022)
         
         # pdf 병합 
         #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2, main_pdf)        이거 구현해야 함(채민이 부분)
-        merged_pdf_buffer = merge_pdfs(pdf1, pdf2) #위에 만들어지면 지우고
+        merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2) #위에 만들어지면 지우고
         
 
           # 파일 포인터를 시작 위치로 이동
