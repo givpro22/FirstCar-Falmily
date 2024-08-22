@@ -23,7 +23,7 @@ from main_report import main_generate_pdf
 
 from example import example #여기는 이제 example 예시라 나중에 삭제 해야함
 
-from GPT import gPT, generate_final_result_pdf
+from GPT import gpt11, gPT12, gpt13, gpt14, generate_pdf_from_results
 
 app = Flask(__name__)
 
@@ -34,10 +34,12 @@ def index():
     if request.method == 'POST':
         files = request.files.getlist('file')  # 업로드된 파일들 가져오기
         df = process_data(files)  # 데이터 전처리 함수 호출 data.py에 있는 함수. finish
+        gpt2=gpt11(df[0])
+        
         
         df1 = manufacturing_0data(df) # matplotlib 시각화를 위한 전처리 코드
         visual(df1) #데이터를 시각화 해주는 matplot 호출 함수 visual.py에 있는 함수
-        df = manufacturing_1data(df)  # 데이터 가공 함수 호출 mf_exp_sum.py에 있는 함수
+        df2 = manufacturing_1data(df)  # 데이터 가공 함수 호출 mf_exp_sum.py에 있는 함수
         
 
         
@@ -60,15 +62,23 @@ def index():
         cost_2022 = process_5data(files)
 
         interview = process_6data(files)
-        gPT1 = gPT(interview[0])
-        pdf5 = generate_final_result_pdf(gPT1)
+        
+        
+        gPT1 = gPT12(interview[0])
+        gPT2 = gpt13(df[0])
+        gpt3 = gpt14(gPT2, gpt2, gPT1)
+        
+        
+        
+        
+        pdf5 = generate_pdf_from_results(gpt3)
 
         #여기는 pdf 만드는 함수 호출
-        pdf1 = generate_pdf(df)
+        pdf1 = generate_pdf(df2)
         pdf2 = generate_pdf2(merged_df)
         pdf3 = generate_pdf3(cost_2023_worst) 
         pdf4 = generate_pdf4(cost_2023_best)     
-        main_pdf = main_generate_pdf(df,onebool_2022,onebool_2023,cost_2023_worst,cost_2023[0], cost_2022[0])
+        main_pdf = main_generate_pdf(df2,onebool_2022,onebool_2023,cost_2023_worst,cost_2023[0], cost_2022[0])
         
         # pdf 병합 
         #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2, main_pdf)        이거 구현해야 함(채민이 부분)
