@@ -23,10 +23,10 @@ class PDF(FPDF):
             self.set_draw_color(0, 0, 0)  # 검정색 줄
             self.line(10, self.get_y(), 200, self.get_y())  # 페이지 하단에 줄 긋기
 
-            self.set_y(-10)
-            self.set_font('Nanum', '', 8)
-            page_number = f'Page {self.page_no()}'
-            self.cell(0, 10, page_number, 0, 0, 'R')
+            # self.set_y(-10)
+            # self.set_font('Nanum', '', 8)
+            # page_number = f'Page {self.page_no()}'
+            # self.cell(0, 10, page_number, 0, 0, 'R')
 
 def create_pdf_object():
     pdf = PDF()
@@ -47,17 +47,16 @@ def add_cover_page(pdf):
     pdf.image(logo_path, x=(pdf.w - logo_width) / 2, y=(pdf.h - logo_height) / 2 - 60, w=logo_width, h=logo_height)
 
     pdf.set_y(pdf.h / 2 + 10)  # 로고 아래로 위치 설정
-    pdf.set_font('Nanum', 'B', 24)
-    pdf.cell(0, 20, '기업 보고서', ln=True, align='C')
+    pdf.set_font('Nanum', 'B', 30)
+    pdf.cell(0, 20, '기업 경영 AI 분석 보고서', ln=True, align='C')
 
-    pdf.set_font('Nanum', '', 16)
+    pdf.set_font('Nanum', '', 13)
     pdf.cell(0, 10, '보고서 작성일:', ln=True, align='C')
     pdf.cell(0, 10, datetime.now().strftime('%Y-%m-%d'), ln=True, align='C')
 
     pdf.ln(20)
-
     pdf.set_font('Nanum', '', 12)
-    pdf.multi_cell(0, 10, '이 보고서는 회사의 재무 상태와 주요 원재료 출고량, 고객 인터뷰 등을 포함한 종합 보고서입니다. 회사 내부 자료로만 사용되며 외부 유출을 금합니다.', align='C')
+    pdf.multi_cell(0, 10, '\n\n이 보고서는 회사의 재무 상태와 주요 원재료 출고량, 고객 인터뷰 등을 포함한 종합 보고서입니다. \n회사 내부 자료로만 사용되며 외부 유출을 금합니다.', align='C')
     pdf.is_cover_page = False  # 표지 페이지 종료
 
 def generate_pdf(dataframe):
@@ -170,7 +169,7 @@ def generate_pdf3(dataframe):
 
     # 보고서 제목 설정
     pdf.set_font('Nanum', 'B', 20)
-    pdf.cell(0, 10, 'FY2023 원가율 WORST 10', ln=True, align='C')
+    pdf.cell(0, 10, 'FY2023 원가율 WORST 20', ln=True, align='C')
     pdf.set_font('Nanum', '', 12)
     pdf.cell(0, 10, '(단위: 원)', ln=True, align='R')
     pdf.ln(10)
@@ -210,7 +209,7 @@ def generate_pdf4(dataframe):
 
     # 보고서 제목 설정
     pdf.set_font('Nanum', 'B', 20)
-    pdf.cell(0, 10, 'FY2023 원가율 BEST 10', ln=True, align='C')
+    pdf.cell(0, 10, 'FY2023 원가율 BEST 20', ln=True, align='C')
     pdf.set_font('Nanum', '', 12)
     pdf.cell(0, 10, '(단위: 원)', ln=True, align='R')
     pdf.ln(10)

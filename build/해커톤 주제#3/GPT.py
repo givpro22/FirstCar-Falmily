@@ -122,10 +122,10 @@ class PDF(FPDF):
             self.set_draw_color(0, 0, 0)  # 검정색 줄
             self.line(10, self.get_y(), 200, self.get_y())  # 페이지 하단에 줄 긋기
 
-            self.set_y(-10)
-            self.set_font('Nanum', '', 8)
-            page_number = f'Page {self.page_no()}'
-            self.cell(0, 10, page_number, 0, 0, 'R')
+            # self.set_y(-10)
+            # self.set_font('Nanum', '', 8)
+            # page_number = f'Page {self.page_no()}'
+            # self.cell(0, 10, page_number, 0, 0, 'R')
 
     def get_string_height(self, text, w):
         # 주어진 너비(w)에서 텍스트가 차지하는 줄 수를 계산하고 높이를 반환합니다.
@@ -147,6 +147,7 @@ def generate_pdf_from_results(final_dicts):
     pdf.add_page()
 
     for dic in final_dicts:
+        openai.api_key = ""
         계정명 = dic['계정명']
         
         # data1과 data2를 CSV 형식의 텍스트로 변환

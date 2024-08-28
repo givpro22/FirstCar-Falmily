@@ -78,7 +78,7 @@ def index():
         pdf2 = generate_pdf2(merged_df)
         pdf3 = generate_pdf3(cost_2023_worst) 
         pdf4 = generate_pdf4(cost_2023_best)     
-        main_pdf = main_generate_pdf(df2,onebool_2022,onebool_2023,cost_2023_worst,cost_2023[0], cost_2022[0])
+        main_pdf = main_generate_pdf(df2,onebool_2022,onebool_2023,cost_2023_worst,cost_2023[0], cost_2022[0], cost_2023_best)
         
         # pdf 병합 
         #merged_pdf_buffer = merge_pdfs(pdf3, pdf1, pdf2, main_pdf)        이거 구현해야 함(채민이 부분)
